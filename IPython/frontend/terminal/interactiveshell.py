@@ -259,13 +259,22 @@ class TerminalMagics(Magics):
 
           -q: quiet mode: do not echo the pasted text back to the terminal.
 
+          -d: dedent lines: removes all leading whitespace from the lines of
+              the pasted text.  While the pasted text is automatically
+              dedented uniformly, you will get IndentationError if the text is
+              non-uniformly indented.  If you know that there should be no
+              indentation in the text (i.e., it is flat code), this is an easy
+              way to fix the issue.
+
         IPython statements (magics, shell escapes) are not supported (yet).
 
         See also
         --------
         cpaste: manually paste code into terminal until you mark its end.
+
         """
-        opts, name = self.parse_options(parameter_s, 'rq', mode='string')
+        opts, name = self.parse_options(parameter_s, 'rqd', mode='string')
+
         if 'r' in opts:
             self.rerun_pasted()
             return
@@ -278,6 +287,9 @@ class TerminalMagics(Magics):
             else:
                 error('Could not get text from the clipboard.')
             return
+
+        if 'd' in opts:
+            block = "\n".join([textwrap.dedent(i) for i in block.split("\n")])
 
         # By default, echo back to terminal unless quiet mode is requested
         if 'q' not in opts:
