@@ -106,4 +106,5 @@ def get_font(family, fallback=None):
     print 'font_info', font_info
     if fallback is not None and font_info.family() != family:
         font = QtGui.QFont(fallback)
+    print 'returned font', font
     return font
