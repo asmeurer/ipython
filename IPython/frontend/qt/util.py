@@ -104,7 +104,7 @@ def get_font(family, fallback=None):
     # is overly strict and returns false in too many cases.
     font_info = QtGui.QFontInfo(font)
     print 'font_info', font_info
-    if fallback is not None and font_info.family() != family:
-        font = QtGui.QFont(fallback)
+    # if fallback is not None and font_info.family() != family:
+    #     font = QtGui.QFont(fallback)
     print 'returned font', font
     return font
