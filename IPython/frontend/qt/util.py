@@ -97,6 +97,7 @@ def get_font(family, fallback=None):
     -------
     font : QFont object
     """
+    print 'family', family
     font = QtGui.QFont(family)
     print 'font', font
     # Check whether we got what we wanted using QFontInfo, since exactMatch()
